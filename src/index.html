@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta
@@ -7,9 +7,10 @@
             content="default-src 'self'; script-src 'self'"
     />
     <meta
-            http-equiv="X-Content-Security-Policy"
+            http-equiv="content-security-policy"
             content="default-src 'self'; script-src 'self'"
     />
+    <link rel="stylesheet" type="text/css" href="/public/output.css">
     <title>Hello from Electron renderer!</title>
 </head>
 <body>
@@ -17,5 +18,5 @@
 <p>👋</p>
 <p id="info"></p>
 </body>
-<script src="./renderer.js"></script>
+<script src="/renderer.js"></script>
 </html>
