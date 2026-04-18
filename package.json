@@ -2,9 +2,11 @@
   "name": "comptability",
   "version": "1.0.0",
   "description": "App for easing the management of one's own finances",
-  "main": "main.js",
+  "main": "electron/main.js",
+  "type": "commonjs",
   "scripts": {
-    "start": "electron-forge start",
+    "build:vite": "vite build",
+    "start": "npm run build:vite && electron-forge start",
     "test": "echo \"No test configured\" && exit 1",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -28,6 +30,7 @@
     "@electron-forge/publisher-github": "^7.11.1",
     "@electron/fuses": "^1.8.0",
     "@electron/rebuild": "^4.0.3",
+    "@vitejs/plugin-vue": "^6.0.6",
     "electron": "^41.2.1"
   },
   "dependencies": {
@@ -35,6 +38,8 @@
     "daisyui": "^5.5.19",
     "electron-squirrel-startup": "^1.0.1",
     "tailwindcss": "^4.2.2",
-    "update-electron-app": "^3.1.2"
+    "update-electron-app": "^3.1.2",
+    "vite": "^8.0.8",
+    "vue": "^3.5.32"
   }
 }

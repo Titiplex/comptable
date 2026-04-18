@@ -1,5 +1,5 @@
-const { app, BrowserWindow, ipcMain } = require('electron/main')
-const { updateElectronApp } = require('update-electron-app')
+const {app, BrowserWindow, ipcMain} = require('electron/main')
+const {updateElectronApp} = require('update-electron-app')
 updateElectronApp()
 const path = require('node:path')
 
@@ -8,11 +8,12 @@ const createWindow = () => {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, '../electron/preload.js'),
         }
     })
 
-    win.loadFile('src/index.html')
+    win.loadFile(path.join(__dirname, '../dist/renderer/src/index.html'));
+    win.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
