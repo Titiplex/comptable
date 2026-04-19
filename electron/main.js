@@ -1,6 +1,8 @@
 const {app, BrowserWindow, ipcMain} = require('electron/main')
 const {updateElectronApp} = require('update-electron-app')
 const path = require('node:path')
+const {registerDbHandlers} = require('./ipc/registerDbHandlers')
+const {disconnectPrisma} = require('./db')
 
 updateElectronApp()
 
@@ -13,20 +15,27 @@ const createWindow = () => {
         },
     })
 
-    win.loadFile(path.join(__dirname, '../dist/renderer/src/index.html'))
+    win.loadFile(path.join(__dirname, '../dist/renderer/index.html'))
     // win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
+    ipcMain.handle('ping', () => 'pong')
+    registerDbHandlers()
+
     createWindow()
 
     app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow()
+        }
     })
-
-    ipcMain.handle('ping', () => 'pong')
 })
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit()
+app.on('window-all-closed', async () => {
+    await disconnectPrisma()
+
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 })

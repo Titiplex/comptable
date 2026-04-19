@@ -1,4 +1,4 @@
-import '/public/output.css'
+import './styles/output.css'
 import {createApp} from 'vue'
 import App from './App.vue'
 

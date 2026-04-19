@@ -9,7 +9,7 @@ export default defineConfig({
         outDir: 'dist/renderer',
         emptyOutDir: true,
         rollupOptions: {
-            input: resolve(process.cwd(), 'src/index.html')
+            input: resolve(process.cwd(), 'index.html')
         }
     }
 })
