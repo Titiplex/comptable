@@ -5,13 +5,14 @@
   "main": "electron/main.js",
   "type": "commonjs",
   "scripts": {
-    "build:vite": "vite build",
-    "start": "npm run build:vite && electron-forge start",
+    "build:vite": "npm run build:css && vite build",
+    "start": "npm run typecheck && npm run build:vite && electron-forge start",
     "test": "echo \"No test configured\" && exit 1",
     "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "build:css": "tailwindcss -i src/input.css -o public/output.css"
+    "make": "npm run typecheck && npm run build:vite && electron-forge make",
+    "publish": "npm run typecheck && npm run build:vite && electron-forge publish",
+    "build:css": "tailwindcss -i src/input.css -o public/output.css",
+    "typecheck": "vue-tsc --noEmit"
   },
   "author": "Titiplex",
   "license": "ISC",
@@ -30,8 +31,12 @@
     "@electron-forge/publisher-github": "^7.11.1",
     "@electron/fuses": "^1.8.0",
     "@electron/rebuild": "^4.0.3",
+    "@types/electron": "^1.4.38",
+    "@types/node": "^25.6.0",
     "@vitejs/plugin-vue": "^6.0.6",
-    "electron": "^41.2.1"
+    "electron": "^41.2.1",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.2.6"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.2.2",
